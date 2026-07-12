@@ -159,10 +159,13 @@ export const sendVerifyOtp = async (req, res) => {
     await user.save();
 
     await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+      from: {
+        name: process.env.SENDER_NAME,
+        address: process.env.SENDER_EMAIL,
+      },
+
       to: user.email,
       subject: "Verify your Email",
-      //text: `Your verification OTP is ${otp}`,
       html: VERIFY_EMAIL_TEMPLATE(otp),
     });
 
@@ -274,12 +277,16 @@ export const sendResetOtp = async (req, res) => {
     await user.save();
 
     await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+      from: {
+        name: process.env.SENDER_NAME,
+        address: process.env.SENDER_EMAIL,
+      },
+
       to: user.email,
-      subject: "OTP for Password Reset",
-      //text: `Your password reset OTP is ${otp}`,
+      subject: "OTP for password reset",
       html: RESET_PASSWORD_TEMPLATE(otp),
     });
+
 
     return res.status(200).json({
       success: true,
