@@ -2,8 +2,8 @@ import { json } from "express";
 import jwt from "jsonwebtoken"
 
 const userAuth = async (req, res, next) => {
-  console.log("Cookies received:", req.cookies);
-  console.log("Token received:", Boolean(req.cookies?.token));
+  // console.log("Cookies received:", req.cookies);
+  // console.log("Token received:", Boolean(req.cookies?.token));
 
   const { token } = req.cookies;
 
