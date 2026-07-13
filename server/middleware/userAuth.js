@@ -2,6 +2,9 @@ import { json } from "express";
 import jwt from "jsonwebtoken"
 
 const userAuth = async (req, res, next) => {
+  console.log("Cookies received:", req.cookies);
+  console.log("Token received:", Boolean(req.cookies?.token));
+
   const { token } = req.cookies;
 
   if (!token) {
@@ -12,7 +15,10 @@ const userAuth = async (req, res, next) => {
   }
 
   try {
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const decodedToken = jwt.verify(
+      token,
+      process.env.JWT_SECRET
+    );
 
     if (!decodedToken.id) {
       return res.status(401).json({
@@ -22,9 +28,10 @@ const userAuth = async (req, res, next) => {
     }
 
     req.userId = decodedToken.id;
-
     next();
   } catch (error) {
+    console.error("JWT verification error:", error.message);
+
     return res.status(401).json({
       success: false,
       message: "Invalid or expired token",

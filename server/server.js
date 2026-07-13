@@ -21,7 +21,15 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(
+        new Error(`CORS blocked origin: ${origin}`)
+      );
+    },
     credentials: true,
   })
 );
@@ -33,16 +41,23 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 
-const startServer = async () => {
-  try {
-    await connectDB();
+if (process.env.NODE_ENV !== "production") {
+  const startServer = async () => {
+    try {
+      await connectDB();
 
-    app.listen(port, () => {
-      console.log(`Server started on port: ${port}`);
-    });
-  } catch (error) {
-    console.error("Failed to start server:", error.message);
-  }
-};
+      app.listen(port, () => {
+        console.log(`Server started on port: ${port}`);
+      });
+    } catch (error) {
+      console.error(
+        "Failed to start server:",
+        error.message
+      );
+    }
+  };
 
-startServer();
+  startServer();
+}
+
+export default app;
