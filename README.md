@@ -12,7 +12,7 @@ A responsive MERN application that supports account creation, login, persistent 
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000?logo=vercel&logoColor=white)](https://vercel.com/)
 
-[API Status](https://mern-auth-five-gules.vercel.app/) · [Report a Bug](https://github.com/princeritik/Mern-Auth/issues) · [Request a Feature](https://github.com/princeritik/Mern-Auth/issues)
+[Live Website](https://mern-auth-five-gules.vercel.app/) · [Report a Bug](https://github.com/princeritik/Mern-Auth/issues) · [Request a Feature](https://github.com/princeritik/Mern-Auth/issues)
 
 </div>
 
